@@ -17,7 +17,20 @@ vendedores = [
 ]
 
 
+def calcular_pago(ventas):
+
+    if ventas > META_COMISION:
+        comision = round(ventas * COMISION_ALTA, 2)
+        bono = BONO if ventas > META_BONO else 0
+    else:
+        comision = round(ventas * COMISION_BAJA, 2)
+        bono = 0
+
+    return round(comision + bono, 2)
+
+
 def calcular_comisiones():
+
     total_pagar = 0
 
     print("=" * 44)
@@ -26,34 +39,11 @@ def calcular_comisiones():
 
     for nombre, ventas in vendedores:
 
-        if ventas > META_COMISION:
+        pago = calcular_pago(ventas)
 
-            comision = ventas * COMISION_ALTA
-            comision = round(comision, 2)
+        total_pagar += pago
 
-            if ventas > META_BONO:
-                bono = BONO
-            else:
-                bono = 0
-
-            pago = round(comision + bono, 2)
-
-            total_pagar += pago
-
-            print(nombre + ": Q " + str(pago))
-
-        else:
-
-            comision = ventas * COMISION_BAJA
-            comision = round(comision, 2)
-
-            bono = 0
-
-            pago = round(comision + bono, 2)
-
-            total_pagar += pago
-
-            print(nombre + ": Q " + str(pago))
+        print(nombre + ": Q " + str(pago))
 
     print("-" * 44)
     print("Total a pagar: Q " + str(round(total_pagar, 2)))
