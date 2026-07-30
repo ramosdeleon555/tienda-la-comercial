@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# programa de comisiones
-# hecho por kevin, no tocar, ya funciona
+"""Calcula y muestra las comisiones mensuales de los vendedores."""
 
 COMISION_ALTA = 0.08
 COMISION_BAJA = 0.05
@@ -18,6 +17,7 @@ vendedores = [
 
 
 def calcular_pago(ventas):
+    """Calcula la comisión y el bono correspondiente."""
 
     if ventas > META_COMISION:
         comision = round(ventas * COMISION_ALTA, 2)
@@ -30,6 +30,7 @@ def calcular_pago(ventas):
 
 
 def calcular_comisiones():
+    """Genera el reporte mensual de comisiones."""
 
     total_pagar = 0
 
@@ -38,11 +39,8 @@ def calcular_comisiones():
     print("=" * 44)
 
     for nombre, ventas in vendedores:
-
         pago = calcular_pago(ventas)
-
         total_pagar += pago
-
         print(nombre + ": Q " + str(pago))
 
     print("-" * 44)
